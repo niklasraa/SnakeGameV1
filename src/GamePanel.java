@@ -37,6 +37,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	// Amount of apple eaten by the snake.
 	int applesEaten;
+	
+	
 
 	// x and y coordinates for apple.
 	int appleX;
