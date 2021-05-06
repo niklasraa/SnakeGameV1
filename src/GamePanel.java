@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,7 +58,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	// ------- CONSTRUCTOR(S) -------
 	GamePanel() {
-
+		random = new Random();
+		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+		this.setBackground(Color.black);
+		this.setFocusable(true);
+		this.addKeyListener(new MyKeyAdapter());
+		startGame();
+		
 	}
 
 	// ------- METHODS -------
@@ -72,6 +80,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	public void draw(Graphics g) {
 
+	}
+	
+	// Adds a new apple to the game-board.
+	public void newApple() {
+		
 	}
 
 	// Movement of the snake
