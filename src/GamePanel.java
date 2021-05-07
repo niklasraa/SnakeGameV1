@@ -13,7 +13,7 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener {
 
 	// ------- VARIABLES -------
-	
+
 	// Screen size
 	static final int SCREEN_WIDTH = 600;
 	static final int SCREEN_HEIGHT = 600;
@@ -23,38 +23,35 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	// Calculate how many objects we can fit on the screen.
 	static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-	
-	// Delay for timer. The higher the number the slower the game is, and vice versa.
+
+	// Delay for timer. The higher the number the slower the game is, and vice
+	// versa.
 	static final int DELAY = 75;
-	
+
 	// Arrays for holding coordinates for body parts of the snake + head.
 	// The snake is not gonna be bigger than the game itself.
 
 	// x and y coordinates for the snake
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
-	
+
 	// Initial amount of body parts (starting size of the snake)
 	int bodyParts = 6;
-	
+
 	// Amount of apple eaten by the snake.
 	int applesEaten;
-	
-	
 
 	// x and y coordinates for apple.
 	int appleX;
-	int appleY; 
-	
+	int appleY;
+
 	// Direction when game begins R(ight), L(eft), U(p), D(own)
 	char direction = 'R';
-	
+
 	// Extra variables.
 	boolean running = false;
 	Timer timer;
 	Random random;
-	
-	
 
 	// ------- CONSTRUCTOR(S) -------
 	GamePanel() {
@@ -64,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
 		startGame();
-		
+
 	}
 
 	// ------- METHODS -------
@@ -75,20 +72,35 @@ public class GamePanel extends JPanel implements ActionListener {
 		running = true;
 		timer = new Timer(DELAY, this);
 		timer.start();
-		
+
 	}
 
 	public void paintComponent(Graphics g) {
-
+		super.paintComponent(g);
+		draw(g);
 	}
 
+	// Draw different objects on the screen.
 	public void draw(Graphics g) {
 
-	}
-	
-	// Adds a new apple to the game-board.
-	public void newApple() {
+		// Turn the game window into a grid for better visual understanding.
+		for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
+			g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+			g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
+		}
 		
+		// Draw the apple on screen.
+		g.setColor(Color.red);
+		g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+
+	}
+
+	// Generate the coordinates for a new apple when method is called (game begins,
+	// apple eaten)
+	public void newApple() {
+		appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+		appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+
 	}
 
 	// Movement of the snake
