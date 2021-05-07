@@ -95,9 +95,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		// Draw head and body
 		for (int i = 0; i < bodyParts; i++) {
-			if(i==0) {
-				g.setColor(Color.green); //head color.
-				g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE); // head fill. 
+			if (i == 0) {
+				g.setColor(Color.green); // head color.
+				g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE); // head fill.
 			} else {
 				g.setColor(new Color(45, 180, 0)); // body part color.
 				g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE); // body part fill.
@@ -117,7 +117,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	// Movement of the snake
 	public void move() {
 		// Shifting the coordinates in the array with one spot at the time.
-		for (int i = bodyParts; i > 0; i++) {
+		for (int i = bodyParts; i > 0; i--) {
 			x[i] = x[i - 1];
 			y[i] = y[i - 1];
 		}
@@ -147,11 +147,25 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	// Checks if the player collides with the edges/walls
 	public void checkCollissions() {
+		for (int i = bodyParts; i > 0; i--) {
 
+		}
 	}
 
 	// Game over event
 	public void gameOver(Graphics g) {
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (running) {
+			move();
+			checkApple();
+			checkCollissions();
+		}
+		repaint();
 
 	}
 
@@ -161,12 +175,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		public void keyPressed(KeyEvent e) {
 
 		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
