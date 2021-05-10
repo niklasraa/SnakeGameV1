@@ -148,7 +148,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	// Checks if the player collides with the edges/walls
 	public void checkCollissions() {
 		for (int i = bodyParts; i > 0; i--) {
-
+			if((x[0] == x[i])){
+				
+			}
 		}
 	}
 
